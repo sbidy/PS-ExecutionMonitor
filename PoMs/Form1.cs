@@ -46,7 +46,6 @@ namespace PoMs
         private void psscanner_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-
             while (true)
             {
                 if (worker.CancellationPending == true)
@@ -56,39 +55,45 @@ namespace PoMs
                 }
                 else
                 {
+                    PSEventEntry entry = monitor.getPSEvent();
                     if (start < start.AddDays(1))
                     {
-                        monitor.getEventOperational();
-                        monitor.getEventNomal();
-                        if (monitor.runcount > count)
+                        if (entry.malware)
                         {
-                            notifyIcon1.BalloonTipText = "PowerShell command executed!\nCount: "+ monitor.runcount + "\nStart date: "+start.ToShortDateString();
-                            notifyIcon1.BalloonTipTitle = "User: " + monitor.user;
-                            notifyIcon1.ShowBalloonTip(5000);
+                            ceateMessageBox("Suspicious script block logged !!! Are u hacked?", "Suspicious script blocked");
                         }
-                        
-                        if (monitor.runcount >= this.trashold)
+                        if (entry.runcount > count)
                         {
-                            MessageBox.Show("To many PowerShell events detected! Are you hacked?","Threshold reached!!", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                            createBalloon("User: " + entry.username, "PowerShell command executed!\nCount: " + entry.runcount + "\nDate logged: " + entry.datetime.ToString());
                         }
-                        if (monitor.openps)
+                        if (entry.runcount >= this.trashold)
                         {
-                            notifyIcon1.BalloonTipText = "PowerShell command was opened!\nStart date: " + start.ToShortDateString();
-                            notifyIcon1.BalloonTipTitle = "User: " + monitor.user;
-                            notifyIcon1.ShowBalloonTip(5000);
-                            monitor.openps = false;
+                            ceateMessageBox("To many PowerShell events detected! Are you hacked?", "Threshold reached!!");
                         }
-                        count = monitor.runcount;
+                        if (entry.opencommand)
+                        {
+                            createBalloon("User;" + entry.username, "PowerShell command was opened!\nDate logged: " + entry.datetime.ToString());
+                        }
+                        count = entry.runcount;
                     }
                     else
                     {
-                        monitor.runcount = 0;
+                        entry.runcount = 0;
                         start = DateTime.Now;
                     }
                     Thread.Sleep(SLEEPTIME);
                 }
             }
-            
+        }
+        private void createBalloon(string titel, string text)
+        {
+            notifyIcon1.BalloonTipText = text;
+            notifyIcon1.BalloonTipTitle = titel;
+            notifyIcon1.ShowBalloonTip(5000);
+        }
+        private void ceateMessageBox(string titel, string text)
+        {
+            MessageBox.Show(text,titel, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
         }
     }
 }
