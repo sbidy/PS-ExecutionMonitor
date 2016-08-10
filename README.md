@@ -17,7 +17,7 @@ The paranoid mode enables a strict detection of all PowerShell interactions. Als
 https://github.com/sbidy/PoMs/releases
 
 Here you can find the compiled "PsMs.exe" (x64 and x86).
-After you start the tool, a small tray icon lives in your icon bar. To close und configure the PoMs click right on the icon.
+After you start the tool, a small tray icon lives in your icon bar. To close or configure the PoMs, click right on the icon.
 
 # Credits
 Idea was originated from Nikhil Mittals talk at BlackHat USA 2016 - "AMSI: How Windows 10 Plans to Stop Script-Based Attacks and
