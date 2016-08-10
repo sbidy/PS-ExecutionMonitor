@@ -4,6 +4,15 @@ A small tool to monitor the Windows Event Log for malicious events. If an event 
 This PoC shows a extrem simple approach to detect PowerShell events in a windows eventlog. The idea behind is, to feed a av-scanner with this additional input.
 As example the av-scanner recognize a event an can log the executed command. A memdump from the PowerShell process can be also additionally created.
 
+The tool scanns the event log in a 2 sec. loop.
+
+## Suspend mode
+If the suspend mode is checkt the tool suspends all processes. To release these klick "release processes".
+
+## Paranoid mode
+The paranoid mode enables a strict detection of all PowerShell interactions. Also the command prompt.
+
+# Credits
 Idea was originated from Nikhil Mittals talk at BlackHat USA 2016 - "AMSI: How Windows 10 Plans to Stop Script-Based Attacks and
 How Well It Does It".
 Link: https://www.blackhat.com/docs/us-16/materials/us-16-Mittal-AMSI-How-Windows-10-Plans-To-Stop-Script-Based-Attacks-And-How-Well-It-Does-It.pdf
