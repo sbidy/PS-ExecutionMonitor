@@ -22,7 +22,7 @@ After you start the tool, a small tray icon lives in your icon bar. To close or 
 # Credits
 Idea was originated from Nikhil Mittals talk at BlackHat USA 2016 - "AMSI: How Windows 10 Plans to Stop Script-Based Attacks and
 How Well It Does It".
-Link: https://www.blackhat.com/docs/us-16/materials/us-16-Mittal-AMSI-How-Windows-10-Plans-To-Stop-Script-Based-Attacks-And-How-Well-It-Does-It.pdf
+Link: http://www.slideshare.net/nikhil_mittal/amsi-how-windows-10-plans-to-stop-scriptbased-attacks-and-how-well-it-does-it
 
 # Status
 Beta - it is a PoC and the project is optimized for Visual Studio
