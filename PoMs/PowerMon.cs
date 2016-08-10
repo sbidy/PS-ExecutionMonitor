@@ -12,8 +12,12 @@ namespace PoMs
         /// </summary>
         DateTime run = DateTime.Now;
         PSEventEntry entry = new PSEventEntry();
-        int timespan = 10000;
+        int timespan = 2500;
 
+        /// <summary>
+        /// Pulls out the PowerShell events from the event log
+        /// </summary>
+        /// <returns>PSEventEntry object with the latest event properties</returns>
         public PSEventEntry getPSEvent()
         {
             // event id 40962 and 4104
@@ -29,8 +33,11 @@ namespace PoMs
 
             for (EventRecord eventInstance = elReader.ReadEvent(); eventInstance != null; eventInstance = elReader.ReadEvent())
             {
+                // add data to the object
                 entry.username = new SecurityIdentifier(eventInstance.UserId.Value).Translate(typeof(NTAccount)).ToString();
                 entry.datetime = (DateTime)eventInstance.TimeCreated;
+                entry.processID = (int)eventInstance.ProcessId;
+                
                 if(eventInstance.TaskDisplayName.ToLower().Contains("block") || eventInstance.TaskDisplayName.ToLower().Contains("suspicious"))
                 {
                    entry.malware = true;

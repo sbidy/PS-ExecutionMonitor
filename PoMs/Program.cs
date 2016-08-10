@@ -16,7 +16,7 @@ namespace PoMs
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 form = new Form1();
+            MainWindow form = new MainWindow();
             Application.Run();
         }
     }
