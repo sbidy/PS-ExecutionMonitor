@@ -12,6 +12,10 @@ If the suspend mode is checkt the tool suspends all processes. To release these 
 ## Paranoid mode
 The paranoid mode enables a strict detection of all PowerShell interactions. Also the command prompt.
 
+# Usage
+At the bin folder you can find the compiled "PsMs.exe" (x64 and x86).
+After you start the tool, a small tray icon lives in your icon bar. To close und configure the PoMs click right on the icon.
+
 # Credits
 Idea was originated from Nikhil Mittals talk at BlackHat USA 2016 - "AMSI: How Windows 10 Plans to Stop Script-Based Attacks and
 How Well It Does It".
