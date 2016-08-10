@@ -13,7 +13,10 @@ If the suspend mode is checkt the tool suspends all processes. To release these 
 The paranoid mode enables a strict detection of all PowerShell interactions. Also the command prompt.
 
 # Usage
-At the bin folder you can find the compiled "PsMs.exe" (x64 and x86).
+
+https://github.com/sbidy/PoMs/releases
+
+Here you can find the compiled "PsMs.exe" (x64 and x86).
 After you start the tool, a small tray icon lives in your icon bar. To close und configure the PoMs click right on the icon.
 
 # Credits
@@ -25,7 +28,7 @@ Link: https://www.blackhat.com/docs/us-16/materials/us-16-Mittal-AMSI-How-Window
 Beta - it is a PoC and the project is optimized for Visual Studio
 
 # Requirements
-.Net 4.5 - Windows 7 or later
+.Net 3.5 - Windows 7 x64/x86 or later
 
 # Author
 Stephan Traub @sbidy
