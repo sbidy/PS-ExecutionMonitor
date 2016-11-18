@@ -1,3 +1,6 @@
+# I need your Feedback!
+Please give me feedback on this "idea"!
+
 # Description
 A small tool to monitor the Windows Event Log for malicious events. If an event occurs a short message shows up. If a (hard) configured threshold is reached, the tool shows an apparent error. Showing a message is not the best action but suitable for a use case.
 
