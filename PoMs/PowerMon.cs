@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Principal;
+using System.Diagnostics;
 
 namespace PoMs
 {
@@ -11,19 +12,15 @@ namespace PoMs
         /// Read the value from threshold
         /// </summary>
         DateTime run = DateTime.Now;
-        PSEventEntry entry = new PSEventEntry();
         int timespan = 2500;
-
+        PSEventEntry entry = new PSEventEntry();
         /// <summary>
         /// Pulls out the PowerShell events from the event log
         /// </summary>
         /// <returns>PSEventEntry object with the latest event properties</returns>
-        public PSEventEntry getPSEvent()
+        private PSEventEntry getPSEvent()
         {
             // event id 40962 and 4104
-
-            entry.malware = false;
-            entry.opencommand = false;
 
             string logType = "Microsoft-Windows-PowerShell/Operational";
             string query = $"*[System[(EventID='4104' or EventID='40962') and TimeCreated[timediff(@SystemTime) <= {timespan}]]]";
@@ -52,6 +49,67 @@ namespace PoMs
                 }
             }
             return entry;
+        }
+        private int getPSProcess()
+        {
+            // get all processes on the local machine
+
+            Process[] localPS = Process.GetProcessesByName("Windows PowerShell");
+            
+            if (localPS.Length < 0)
+            {
+                for (int i=0; i<localPS.Length; i++)
+                {
+                    return localPS[i].Id;
+                }
+            }
+            return 0;
+        }
+        private int getISEProcess()
+        {
+            Process[] localAll = Process.GetProcesses();
+
+            Process[] localISE = Process.GetProcessesByName("Windows PowerShell ISE");
+
+            if (localISE.Length < 0)
+            {
+                for (int i = 0; i < localISE.Length; i++)
+                { 
+                    return localISE[i].Id;
+                }
+            }
+            return 0;
+        }
+
+        public PSEventEntry checkSystem ()
+        {
+            entry.malware = false;
+            entry.opencommand = false;
+            int processID = getISEProcess();
+            // check if a PowerShell process ISE is running
+            if (getISEProcess() > 0)
+            {
+                entry.processID = processID;
+                entry.runcount = entry.runcount + 1;
+                entry.opencommand = true;
+                return entry;
+            }
+            // check if a PowerShell process is running
+            processID = getPSProcess();
+            if (getISEProcess() > 0)
+            {
+                entry.processID = processID;
+                entry.runcount = entry.runcount + 1;
+                entry.opencommand = true;
+                return entry;
+            }
+            // if no process found -- check the eventlog
+            PSEventEntry event_tmp = getPSEvent();
+            if(event_tmp.processID != 0)
+            {
+                return event_tmp;
+            }
+            return event_tmp;
         }
     }
 }

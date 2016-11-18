@@ -32,13 +32,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.paranoidModeButton = new System.Windows.Forms.ToolStripMenuItem();
             this.suspendProcessButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.releaseProcessButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitButton = new System.Windows.Forms.ToolStripMenuItem();
             this.psscanner = new System.ComponentModel.BackgroundWorker();
-            this.paranoidModeButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.blockcountMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,10 +50,12 @@
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "PoMs";
             this.notifyIcon.Visible = true;
+            this.notifyIcon.Click += new System.EventHandler(this.notifyIcon_Click);
             // 
             // contextMenu
             // 
             this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blockcountMenu,
             this.paranoidModeButton,
             this.suspendProcessButton,
             this.toolStripSeparator1,
@@ -63,6 +66,15 @@
             this.contextMenu.Size = new System.Drawing.Size(183, 126);
             this.contextMenu.Text = "PsMs V 0.1";
             // 
+            // paranoidModeButton
+            // 
+            this.paranoidModeButton.CheckOnClick = true;
+            this.paranoidModeButton.ForeColor = System.Drawing.Color.DarkRed;
+            this.paranoidModeButton.Name = "paranoidModeButton";
+            this.paranoidModeButton.Size = new System.Drawing.Size(182, 22);
+            this.paranoidModeButton.Text = "Paranoid mode";
+            this.paranoidModeButton.ToolTipText = "Blocks all processes!!! Also the command prompt.";
+            // 
             // suspendProcessButton
             // 
             this.suspendProcessButton.CheckOnClick = true;
@@ -70,12 +82,22 @@
             this.suspendProcessButton.Size = new System.Drawing.Size(182, 22);
             this.suspendProcessButton.Text = "Suspend processes";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
+            // 
             // releaseProcessButton
             // 
             this.releaseProcessButton.Name = "releaseProcessButton";
             this.releaseProcessButton.Size = new System.Drawing.Size(182, 22);
             this.releaseProcessButton.Text = "Release all processes";
             this.releaseProcessButton.Click += new System.EventHandler(this.releaseProcessButton_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
             // 
             // exitButton
             // 
@@ -88,24 +110,11 @@
             // 
             this.psscanner.DoWork += new System.ComponentModel.DoWorkEventHandler(this.psscanner_DoWork);
             // 
-            // paranoidModeButton
+            // blockcountMenu
             // 
-            this.paranoidModeButton.CheckOnClick = true;
-            this.paranoidModeButton.ForeColor = System.Drawing.Color.DarkRed;
-            this.paranoidModeButton.Name = "paranoidModeButton";
-            this.paranoidModeButton.Size = new System.Drawing.Size(182, 22);
-            this.paranoidModeButton.Text = "Paranoid mode";
-            this.paranoidModeButton.ToolTipText = "Blocks all processes!!! Also the command prompt.";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(179, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
+            this.blockcountMenu.Name = "blockcountMenu";
+            this.blockcountMenu.Size = new System.Drawing.Size(182, 22);
+            this.blockcountMenu.Text = "Blocked tasks:";
             // 
             // MainWindow
             // 
@@ -130,6 +139,7 @@
         private System.Windows.Forms.ToolStripMenuItem paranoidModeButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem blockcountMenu;
     }
 }
 

@@ -40,6 +40,7 @@ namespace PoMs
         private int SLEEPTIME = 2000;
         private int trashold = 5;
         private List<int> suspendetPS = new List<int>(100);
+        private int blockcount = 0;
 
         public MainWindow()
         {
@@ -78,8 +79,8 @@ namespace PoMs
                 }
                 else
                 {
-                    PSEventEntry entry = monitor.getPSEvent();
-                    if (start < start.AddDays(1))
+                    PSEventEntry entry = monitor.checkSystem();
+                    if (start < start.AddDays(1) && entry != null)
                     {
                         if (entry.malware)
                         {
@@ -121,6 +122,7 @@ namespace PoMs
                 {
                     controller.SuspendProcess(pid);
                     suspendetPS.Add(pid);
+                    blockcount++;
                 }
             }
             catch (ArgumentException ex)
@@ -149,13 +151,20 @@ namespace PoMs
                     if (!Process.GetProcessById(pid).HasExited)
                     {
                         controller.ResumeProcess(pid);
+                        blockcount--;
                     }
+                    
                 }
                 catch (ArgumentException ex)
                 {
                     // do nothing - process already closed
                 }
             }
+        }
+
+        private void notifyIcon_Click(object sender, EventArgs e)
+        {
+            blockcountMenu.Text = "Blocked tasks: " + blockcount;
         }
     }
 }
