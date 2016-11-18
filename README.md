@@ -1,8 +1,8 @@
 # Description
 A small tool to monitor the Windows Event Log for malicious events. If an event occurs a short message shows up. If a (hard) configured threshold is reached, the tool shows an apparent error. Showing a message is not the best action but suitable for a use case.
 
-This PoC shows a extrem simple approach to detect PowerShell events in a windows eventlog. The idea behind is, to feed a av-scanner with this additional input.
-As example the av-scanner recognize a event an can log the executed command. A memdump from the PowerShell process can be also additionally created.
+This PoC shows a extrem simple approach to detect PowerShell events in a Windows eventlog. The idea behind is, to feed a av-scanner with this additional input.
+As example the av-scanner recognize a event an can log the executed PS command. A memdump from the PowerShell process can be also additionally created.
 
 The tool scanns the event log in a 2 sec. loop.
 
@@ -16,8 +16,8 @@ The paranoid mode enables a strict detection of all PowerShell interactions. Als
 
 https://github.com/sbidy/PoMs/releases
 
-Here you can find the compiled "PsMs.exe" (x64 and x86).
-After you start the tool, a small tray icon lives in your icon bar. To close or configure the PoMs, click right on the icon.
+Here you can find the compiled "PoMs.exe" (x64 and x86).
+After you start the tool, a small tray icon lives in your icon bar. To close or configure the PS-ExecutionMonitor, click right on the icon.
 
 # Credits
 Idea was originated from Nikhil Mittals talk at BlackHat USA 2016 - "AMSI: How Windows 10 Plans to Stop Script-Based Attacks and
