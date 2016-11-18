@@ -7,7 +7,7 @@ As example the av-scanner recognize a event an can log the executed command. A m
 The tool scanns the event log in a 2 sec. loop.
 
 ## Suspend mode
-If the suspend mode is checked the tool suspends all processes. To release these click "release processes".
+If the suspend mode is checked the tool suspends all PS processes. To release these click "release processes".
 
 ## Paranoid mode
 The paranoid mode enables a strict detection of all PowerShell interactions. Also the command prompt.
