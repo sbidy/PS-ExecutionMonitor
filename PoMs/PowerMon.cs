@@ -80,36 +80,5 @@ namespace PoMs
             }
             return 0;
         }
-
-        public PSEventEntry checkSystem ()
-        {
-            entry.malware = false;
-            entry.opencommand = false;
-            int processID = getISEProcess();
-            // check if a PowerShell process ISE is running
-            if (getISEProcess() > 0)
-            {
-                entry.processID = processID;
-                entry.runcount = entry.runcount + 1;
-                entry.opencommand = true;
-                return entry;
-            }
-            // check if a PowerShell process is running
-            processID = getPSProcess();
-            if (getISEProcess() > 0)
-            {
-                entry.processID = processID;
-                entry.runcount = entry.runcount + 1;
-                entry.opencommand = true;
-                return entry;
-            }
-            // if no process found -- check the eventlog
-            PSEventEntry event_tmp = getPSEvent();
-            if(event_tmp.processID != 0)
-            {
-                return event_tmp;
-            }
-            return event_tmp;
-        }
     }
 }
